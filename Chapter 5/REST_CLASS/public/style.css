@@ -1,0 +1,13 @@
+h1{
+    color: rgb(193, 22, 22);
+}
+.post{
+    background-color: blanchedalmond;
+}
+.user{
+    color: rgb(193, 22, 22);
+    font-style: italic;
+}
+a{
+    text-decoration: none;
+}
