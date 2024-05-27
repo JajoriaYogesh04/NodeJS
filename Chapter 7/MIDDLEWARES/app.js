@@ -18,9 +18,16 @@ const port= 8080;
 //     next();
 // })
 
+// LOGGER
+
 app.use((req, res, next)=>{
     req.time= new Date(Date.now()).toString();
     console.log(req.method, req.hostname, req.path, req.time);
+    return next();
+})
+
+app.use("/random", (req, res, next)=>{
+    console.log("I am only for RANDOM");
     return next();
 })
 
@@ -32,6 +39,10 @@ app.get("/", (req, res)=>{
 app.get("/random", (req, res)=>{
     console.log("Getting request on RANDOM page");
     res.send("Getting request on RANDOM page");
+})
+
+app.use((req, res, next)=>{
+    res.send("!PAGE NOTE FOUND!");
 })
 
 app.listen(port, ()=>{
