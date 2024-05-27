@@ -4,9 +4,18 @@ const port= 8080;
 
 //Middleware->Response send
 
-app.use((req, res)=>{
-    console.log("Hello I am MIDDLEWARE");
-    res.send("Hello I am MIDDLEWARE");
+app.use((req, res, next)=>{
+    // let  { query } = req.query;
+    // console.log( query );   //Show we can access the request and response
+    console.log("Hello I am MIDDLEWARE 1");
+    // res.send("MIDDLEWARE FINISHED");
+    return next();
+    console.log("Function after MIDDLEWARW 1");     //NOT EXECUTE
+})
+
+app.use((req, res, next)=>{
+    console.log("Hello I am MIDDLEWARE 2");
+    next();
 })
 
 app.get("/", (req, res)=>{
