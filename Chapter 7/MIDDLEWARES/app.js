@@ -43,8 +43,9 @@ const checkToken= (req, res, next)=>{
         return next();
     }
     else{
-        console.log("API ACCESS DENIED!");
-        res.send("API ACCESS DENIED!");
+        // console.log("API ACCESS DENIED!");
+        // res.send("API ACCESS DENIED!");
+        throw new Error("ACCESS DENIED");
     }
 }
 
@@ -66,6 +67,10 @@ app.get("/", (req, res)=>{
 app.get("/random", (req, res)=>{
     console.log("Getting request on RANDOM page");
     res.send("Getting request on RANDOM page");
+})
+
+app.get("/wrong", (req, res) =>{
+    abcd=abcd;
 })
 
 app.use((req, res, next)=>{
