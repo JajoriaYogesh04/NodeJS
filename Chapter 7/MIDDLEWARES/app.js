@@ -26,6 +26,22 @@ app.use((req, res, next)=>{
     return next();
 })
 
+app.use("/api", (req, res, next)=>{
+    let { token }= req.query;
+    if(token=== "giveaccess"){
+        return next();
+    }
+    else{
+        console.log("API ACCESS DENIED!");
+        res.send("API ACCESS DENIED!");
+    }
+})
+
+app.get("/api", (req, res)=>{
+    console.log("Getting request on API");
+    res.send("Getting request on API");
+})
+
 app.use("/random", (req, res, next)=>{
     console.log("I am only for RANDOM");
     return next();
