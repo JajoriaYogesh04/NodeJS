@@ -26,7 +26,18 @@ app.use((req, res, next)=>{
     return next();
 })
 
-app.use("/api", (req, res, next)=>{
+// app.use("/api", (req, res, next)=>{
+//     let { token }= req.query;
+//     if(token=== "giveaccess"){
+//         return next();
+//     }
+//     else{
+//         console.log("API ACCESS DENIED!");
+//         res.send("API ACCESS DENIED!");
+//     }
+// })
+
+const checkToken= (req, res, next)=>{
     let { token }= req.query;
     if(token=== "giveaccess"){
         return next();
@@ -35,9 +46,9 @@ app.use("/api", (req, res, next)=>{
         console.log("API ACCESS DENIED!");
         res.send("API ACCESS DENIED!");
     }
-})
+}
 
-app.get("/api", (req, res)=>{
+app.get("/api", checkToken, (req, res)=>{
     console.log("Getting request on API");
     res.send("Getting request on API");
 })
