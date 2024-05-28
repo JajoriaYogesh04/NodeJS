@@ -98,7 +98,9 @@ app.get("/error", (req, res) =>{
 
 app.use((err, req, res, next)=>{
     console.log("-----ERROR-----");
-    res.send(err);
+    // res.send(err);
+    let {status=403, message="SOME ERROR"}= err;
+    res.status(status).send(message);
 })
 
 app.use((req, res, next)=>{
