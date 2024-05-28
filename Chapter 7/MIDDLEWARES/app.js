@@ -69,8 +69,18 @@ app.get("/random", (req, res)=>{
     res.send("Getting request on RANDOM page");
 })
 
-app.get("/wrong", (req, res) =>{
+app.get("/error", (req, res) =>{
     abcd=abcd;
+})
+
+app.use((err, req, res, next)=>{
+    console.log("----------- E R R O R 1 ------------");
+    next(err);
+})
+
+app.use((err, req, res, next)=>{
+    console.log("----------- E R R O R 2 ------------");
+    next(err);
 })
 
 app.use((req, res, next)=>{
