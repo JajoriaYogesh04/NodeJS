@@ -86,6 +86,10 @@ app.get("/error", (req, res) =>{
     abcd=abcd;
 })
 
+app.get("/admin", (req, res)=>{
+    throw new ExpressError(403, "ADMIN access DENIED");
+})
+
 // app.use((err, req, res, next)=>{
 //     console.log("----------- E R R O R 1 ------------");
 //     next(err);
