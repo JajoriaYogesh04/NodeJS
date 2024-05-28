@@ -1,6 +1,7 @@
 const express= require("express");
 const app= express();
 const port= 8080;
+const ExpressError= require("./ExpressError");
 
 //Middleware->Response send
 
@@ -37,6 +38,18 @@ app.use((req, res, next)=>{
 //     }
 // })
 
+// const checkToken= (req, res, next)=>{
+//     let { token }= req.query;
+//     if(token=== "giveaccess"){
+//         return next();
+//     }
+//     else{
+//         // console.log("API ACCESS DENIED!");
+//         // res.send("API ACCESS DENIED!");
+//         throw new Error("ACCESS DENIED");
+//     }
+// }
+
 const checkToken= (req, res, next)=>{
     let { token }= req.query;
     if(token=== "giveaccess"){
@@ -45,7 +58,7 @@ const checkToken= (req, res, next)=>{
     else{
         // console.log("API ACCESS DENIED!");
         // res.send("API ACCESS DENIED!");
-        throw new Error("ACCESS DENIED");
+        throw new ExpressError(401, "ACCESS DENIED");
     }
 }
 
@@ -73,14 +86,19 @@ app.get("/error", (req, res) =>{
     abcd=abcd;
 })
 
-app.use((err, req, res, next)=>{
-    console.log("----------- E R R O R 1 ------------");
-    next(err);
-})
+// app.use((err, req, res, next)=>{
+//     console.log("----------- E R R O R 1 ------------");
+//     next(err);
+// })
+
+// app.use((err, req, res, next)=>{
+//     console.log("----------- E R R O R 2 ------------");
+//     next(err);
+// })
 
 app.use((err, req, res, next)=>{
-    console.log("----------- E R R O R 2 ------------");
-    next(err);
+    console.log("-----ERROR-----");
+    res.send(err);
 })
 
 app.use((req, res, next)=>{
